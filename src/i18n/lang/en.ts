@@ -3,6 +3,7 @@ import type { UIStrings } from "../types";
 export default {
   nav: {
     home: "Home",
+	zh: "简体中文",
     posts: "Posts",
     tags: "Tags",
     about: "About",
