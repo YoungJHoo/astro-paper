@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects
+# Astro's static build currently outputs the default locale (en) under /en/
+# instead of the root, even with prefixDefaultLocale: false. Redirect the
+# root to the English homepage so visitors don't hit a 404.
+/   /en/   301
