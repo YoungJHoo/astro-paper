@@ -7,6 +7,10 @@ export interface UIStrings {
     archives: string;
     search: string;
   };
+  lang: {
+    /** aria-label for the language switcher, e.g. "Switch to {{language}}" */
+    switchTo: string;
+  };
   post: {
     publishedAt: string;
     updatedAt: string;
@@ -19,6 +23,13 @@ export interface UIStrings {
     editPage: string;
     previousPost: string;
     nextPost: string;
+    copyCode: string;
+    copied: string;
+    zoomImage: string;
+    zoomImageAlt: string;
+    imagePreview: string;
+    imagePreviewAlt: string;
+    closeImagePreview: string;
   };
   pagination: {
     prev: string;
@@ -30,6 +41,12 @@ export interface UIStrings {
     featured: string;
     recentPosts: string;
     allPosts: string;
+    heroTitle: string;
+    heroIntro: string;
+    heroMoreInfoPrefix: string;
+    clickHere: string;
+    heroMoreInfoSuffix: string;
+    rssFeed: string;
   };
   footer: {
     copyright: string;
@@ -51,6 +68,16 @@ export interface UIStrings {
     searchTitle: string;
     searchDesc: string;
   };
+  search: {
+    clearSearch: string;
+    loadMore: string;
+    zeroResults: string;
+    oneResult: string;
+    manyResults: string;
+    altSearch: string;
+    searchSuggestion: string;
+    searching: string;
+  };
   a11y: {
     skipToContent: string;
     openMenu: string;
@@ -60,6 +87,7 @@ export interface UIStrings {
     noResults: string;
     goToPreviousPage: string;
     goToNextPage: string;
+    paginationNav: string;
   };
   notFound: {
     title: string;

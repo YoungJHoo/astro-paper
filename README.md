@@ -8,8 +8,10 @@
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge)](http://commitizen.github.io/cz-cli/)
 
 AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro blog theme. This theme is designed and crafted based on [my personal blog](https://satnaing.dev/blog).
-
+AstroPaper是一款轻量的、响应式的、易获得的及适配搜索引擎优化的，基于Astro框架的博客主题。
 Read [the blog posts](https://astro-paper.pages.dev/posts/) or check [the README Documentation Section](#-documentation) for more info.
+
+详情请阅读[帖子](https://astro-paper.pages.dev/posts/)或[说明文档]()
 
 ## 🔥 Features
 
@@ -128,7 +130,7 @@ pnpm dev
 
 You can add your [Google Site Verification HTML tag](https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag) by setting `site.googleVerification` in `astro-paper.config.ts`:
 
-```ts file="astro-paper.config.ts"
+```ts
 export default defineAstroPaperConfig({
   site: {
     // ...
@@ -145,7 +147,7 @@ export default defineAstroPaperConfig({
 All commands are run from the root of the project, from a terminal:
 
 | Command          | Action                                                                                                                           |
-| :--------------- | :------------------------------------------------------------------------------------------------------------------------------- |
+|:---------------- |:-------------------------------------------------------------------------------------------------------------------------------- |
 | `pnpm install`   | Installs dependencies                                                                                                            |
 | `pnpm dev`       | Starts local dev server at `localhost:4321`                                                                                      |
 | `pnpm build`     | Type-checks, builds the site, runs Pagefind indexing, and copies the index to `public/pagefind/`                                 |

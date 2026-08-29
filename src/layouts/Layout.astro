@@ -1,9 +1,13 @@
 ---
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import {
+  getAbsoluteLocaleUrl,
+  getRelativeLocaleUrl,
+} from "astro:i18n";
 import { resolveDefaultOgImagePath } from "@/utils/resolveDefaultOgImagePath";
-import { getAssetPath } from "@/utils/withBase";
+import { getAssetPath, stripBase, stripLocale } from "@/utils/withBase";
+import { getOtherLocale } from "@/i18n/locales";
 import config from "@/config";
 import "@/styles/global.css";
 
@@ -16,6 +20,8 @@ type Props = {
 
 const { site } = config;
 
+const currentLocale = Astro.currentLocale ?? site.lang;
+
 const {
   title = site.title,
   description = site.description,
@@ -24,16 +30,19 @@ const {
 } = Astro.props;
 
 const socialImageURL = new URL(ogImage, Astro.site ?? Astro.url);
-const rssHref = getRelativeLocaleUrl(
-  Astro.currentLocale ?? config.site.lang,
-  "rss.xml"
-);
+const rssHref = getRelativeLocaleUrl(currentLocale, "rss.xml");
+
+// hreflang alternates: point to the same logical page in the other locale.
+const alternateLocale = getOtherLocale(currentLocale);
+const alternatePath = stripLocale(stripBase(Astro.url.pathname), currentLocale);
+const alternateURL = getAbsoluteLocaleUrl(alternateLocale, alternatePath);
+const defaultLocaleURL = getAbsoluteLocaleUrl("en", alternatePath);
 ---
 
 <!doctype html>
 <html
   dir={site.dir ?? "ltr"}
-  lang={Astro.currentLocale ?? site.lang}
+  lang={currentLocale}
   class="overflow-y-scroll scroll-smooth"
 >
   <head>
@@ -44,11 +53,21 @@ const rssHref = getRelativeLocaleUrl(
     <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Font -->
-    <Font
-      cssVariable="--font-google-sans-code"
-      preload={[{ subset: "latin", weight: 400, style: "normal" }]}
-    />
+    <!-- Font: web font only for the English site; the Chinese site uses the
+         client's system default fonts (see theme.css). -->
+    {
+      currentLocale === "en" && (
+        <Font
+          cssVariable="--font-google-sans-code"
+          preload={[{ subset: "latin", weight: 400, style: "normal" }]}
+        />
+      )
+    }
+
+    <!-- Locale alternates -->
+    <link rel="alternate" hreflang={alternateLocale} href={alternateURL} />
+    <link rel="alternate" hreflang="en" href={defaultLocaleURL} />
+    <link rel="alternate" hreflang="x-default" href={defaultLocaleURL} />
 
     <!-- Primary meta -->
     <title>{title}</title>

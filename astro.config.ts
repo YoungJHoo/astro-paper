@@ -17,6 +17,7 @@ import {
   transformerNotationWordHighlight,
 } from "@shikijs/transformers";
 import { transformerFileName } from "./src/utils/transformers/fileName";
+import { LOCALES } from "./src/i18n/locales";
 import config from "./astro-paper.config";
 
 export default defineConfig({
@@ -29,7 +30,7 @@ export default defineConfig({
     }),
   ],
   i18n: {
-    locales: ["en"],
+    locales: [...LOCALES],
     defaultLocale: "en",
     routing: {
       prefixDefaultLocale: false,
@@ -62,11 +63,34 @@ export default defineConfig({
     {
       name: "Google Sans Code",
       cssVariable: "--font-google-sans-code",
-      provider: fontProviders.google(),
-      fallbacks: ["monospace"],
+      provider: fontProviders.local(),
+      // Latin-only font: CJK glyphs always fall back to the client's system
+      // fonts (e.g. PingFang SC, Microsoft YaHei) per the site's i18n design.
+      fallbacks: [
+        "monospace",
+        "PingFang SC",
+        "Hiragino Sans GB",
+        "Microsoft YaHei",
+        "Noto Sans SC",
+        "sans-serif",
+      ],
       weights: [300, 400, 500, 600, 700],
       styles: ["normal", "italic"],
-      formats: ["woff", "ttf"],
+      formats: ["woff2"],
+      options: {
+        variants: [
+          { src: ["node_modules/@fontsource/google-sans-code/files/google-sans-code-latin-300-normal.woff2"], weight: 300, style: "normal" },
+          { src: ["node_modules/@fontsource/google-sans-code/files/google-sans-code-latin-300-italic.woff2"], weight: 300, style: "italic" },
+          { src: ["node_modules/@fontsource/google-sans-code/files/google-sans-code-latin-400-normal.woff2"], weight: 400, style: "normal" },
+          { src: ["node_modules/@fontsource/google-sans-code/files/google-sans-code-latin-400-italic.woff2"], weight: 400, style: "italic" },
+          { src: ["node_modules/@fontsource/google-sans-code/files/google-sans-code-latin-500-normal.woff2"], weight: 500, style: "normal" },
+          { src: ["node_modules/@fontsource/google-sans-code/files/google-sans-code-latin-500-italic.woff2"], weight: 500, style: "italic" },
+          { src: ["node_modules/@fontsource/google-sans-code/files/google-sans-code-latin-600-normal.woff2"], weight: 600, style: "normal" },
+          { src: ["node_modules/@fontsource/google-sans-code/files/google-sans-code-latin-600-italic.woff2"], weight: 600, style: "italic" },
+          { src: ["node_modules/@fontsource/google-sans-code/files/google-sans-code-latin-700-normal.woff2"], weight: 700, style: "normal" },
+          { src: ["node_modules/@fontsource/google-sans-code/files/google-sans-code-latin-700-italic.woff2"], weight: 700, style: "italic" },
+        ],
+      },
     },
   ],
   env: {

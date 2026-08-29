@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import type { GetStaticPaths } from "astro";
 import IconRss from "@/assets/icons/IconRss.svg";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import Layout from "@/layouts/Layout.astro";
@@ -10,8 +11,12 @@ import Socials from "@/components/Socials.astro";
 import Card from "@/components/Card.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
+import { LOCALES } from "@/i18n/locales";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
+
+export const getStaticPaths = (() =>
+  LOCALES.map(locale => ({ params: { locale } }))) satisfies GetStaticPaths;
 
 const { socials, posts: postsConfig } = config;
 
@@ -35,35 +40,33 @@ const homePath = getRelativeLocaleUrl(locale, "");
   >
     <section id="hero" class="border-border border-b pt-8 pb-6">
       <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Nice to meet you!
+        {t.home.heroTitle}
       </h1>
       <a
         target="_blank"
         href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
         class="inline-block"
-        aria-label="RSS Feed"
-        title="RSS Feed"
+        aria-label={t.home.rssFeed}
+        title={t.home.rssFeed}
       >
         <IconRss
           width={20}
           height={20}
           class="stroke-accent scale-125 stroke-3 rtl:-rotate-90"
         />
-        <span class="sr-only">RSS Feed</span>
+        <span class="sr-only">{t.home.rssFeed}</span>
       </a>
 
-      <p>
-        Hello! This is my first website for learn coding. It is an open source project devoted by satnaing from github. If you open this website by mistake, please don't try any bottom. Everything is developing.
-      </p>
+      <p>{t.home.heroIntro}</p>
       <p class="mt-2">
-        You can click{" "}
+        {t.home.heroMoreInfoPrefix}
         <LinkButton
           class="hover:text-accent underline decoration-dashed underline-offset-4"
           href="https://github.com/satnaing/astro-paper"
         >
-          here
-        </LinkButton>{" "}
-        for more info.
+          {t.home.clickHere}
+        </LinkButton>
+        {t.home.heroMoreInfoSuffix}
       </p>
       {
         socials.length > 0 && (

@@ -9,13 +9,17 @@ import IconMoon from "@/assets/icons/IconMoon.svg";
 import IconX from "@/assets/icons/IconX.svg";
 import LinkButton from "./LinkButton.astro";
 import { stripBase, stripLocale } from "@/utils/withBase";
-import { useTranslations } from "@/i18n";
+import { getOtherLocale, localeNames } from "@/i18n/locales";
+import { tplStr, useTranslations } from "@/i18n";
 import config from "@/config";
 
 const { site, features } = config;
 
 const locale = Astro.currentLocale ?? config.site.lang;
 const t = useTranslations(locale);
+
+// Language switcher: link to the same logical page in the other locale.
+const otherLocale = getOtherLocale(locale);
 
 // Strip the base prefix so isActive comparisons work regardless of deploy subdirectory.
 // e.g. with base "/blog": "/blog/posts/slug" → "/posts/slug"
@@ -26,6 +30,11 @@ const pathWithoutTrailingSlash =
     : relativePath;
 
 const currentPath = stripLocale(pathWithoutTrailingSlash, locale);
+
+const switchHref = getRelativeLocaleUrl(otherLocale, currentPath);
+const switchLabel = tplStr(t.lang.switchTo, {
+  language: localeNames[otherLocale],
+});
 
 const isActive = (path: string) => {
   const currentPathArray = currentPath.split("/").filter(p => p.trim());
@@ -159,6 +168,16 @@ const isActive = (path: string) => {
             </li>
           )
         }
+        <li class="col-span-2">
+          <a
+            href={switchHref}
+            aria-label={switchLabel}
+            title={switchLabel}
+            class="focus-outline block px-4 py-3 text-center font-medium sm:px-2 sm:py-1"
+          >
+            {localeNames[otherLocale]}
+          </a>
+        </li>
       </ul>
     </nav>
   </div>

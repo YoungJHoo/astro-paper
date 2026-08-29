@@ -9,6 +9,9 @@ export default {
     archives: "Archives",
     search: "Search",
   },
+  lang: {
+    switchTo: "Switch to {{language}}",
+  },
   post: {
     publishedAt: "Published at",
     updatedAt: "Updated",
@@ -21,6 +24,13 @@ export default {
     editPage: "Edit page",
     previousPost: "Previous Post",
     nextPost: "Next Post",
+    copyCode: "Copy",
+    copied: "Copied",
+    zoomImage: "Zoom image",
+    zoomImageAlt: "Zoom image: {{alt}}",
+    imagePreview: "Image preview",
+    imagePreviewAlt: "Image preview: {{alt}}",
+    closeImagePreview: "Close image preview",
   },
   pagination: {
     prev: "Prev",
@@ -32,6 +42,13 @@ export default {
     featured: "Featured",
     recentPosts: "Recent Posts",
     allPosts: "All Posts",
+    heroTitle: "Nice to meet you!",
+    heroIntro:
+      "Hello! This is my first website for learn coding. It is an open source project devoted by satnaing from github. If you open this website by mistake, please don't try any bottom. Everything is developing.",
+    heroMoreInfoPrefix: "You can click",
+    clickHere: "here",
+    heroMoreInfoSuffix: "for more info.",
+    rssFeed: "RSS Feed",
   },
   footer: {
     copyright: "Copyright",
@@ -53,6 +70,17 @@ export default {
     searchTitle: "Search",
     searchDesc: "Search any article ...",
   },
+  search: {
+    clearSearch: "Clear search",
+    loadMore: "Load more results",
+    zeroResults: "No results for {{query}}",
+    oneResult: "1 result for {{query}}",
+    manyResults: "{{count}} results for {{query}}",
+    altSearch:
+      "No results for {{query}}. Showing results for {{suggestion}} instead",
+    searchSuggestion: "Did you mean {{suggestion}}?",
+    searching: "Searching for {{query}}...",
+  },
   a11y: {
     skipToContent: "Skip to content",
     openMenu: "Open menu",
@@ -62,6 +90,7 @@ export default {
     noResults: "No results found",
     goToPreviousPage: "Go to previous page",
     goToNextPage: "Go to next page",
+    paginationNav: "Pagination Navigation",
   },
   notFound: {
     title: "404 Not Found",
