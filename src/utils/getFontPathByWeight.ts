@@ -9,7 +9,9 @@ export function getFontPathByWeight(
   }
 ): string | undefined {
   const style = options?.style ?? "normal";
-  const format = options?.format ?? "truetype";
+  // satori cannot parse woff2, only ttf/otf/woff. The local font provider
+  // registers .woff files, so match that format explicitly.
+  const format = options?.format ?? "woff";
 
   for (const font of fonts) {
     if (font.weight === String(weight) && font.style === style) {
