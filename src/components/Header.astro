@@ -31,7 +31,9 @@ const pathWithoutTrailingSlash =
 
 const currentPath = stripLocale(pathWithoutTrailingSlash, locale);
 
-const switchHref = getRelativeLocaleUrl(otherLocale, currentPath);
+// Always link to the other locale's homepage. On 404 pages the
+// build-time pathname is "/404", which would produce "/zh-cn/404".
+const switchHref = getRelativeLocaleUrl(otherLocale, "");
 const switchLabel = tplStr(t.lang.switchTo, {
   language: localeNames[otherLocale],
 });
